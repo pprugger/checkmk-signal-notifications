@@ -13,9 +13,6 @@ This plugin uses signald for the communication with Signal.
 For the documentation of signald see:
 https://gitlab.com/signald/signald
 
-# License 
-This project is licensed under the MIT license. See the [LICENSE](LICENSE) for details.
-
 # Installation
 * Install signald on your server liked described here:
 https://signald.org/articles/getting-started/
@@ -37,5 +34,13 @@ Here is an example of a signal message, part of the data obfuscated for privacy 
 
 
 Thanks to mh-g who brought me to the idea!
+
 Code to be found here:
+
 https://github.com/mh-g/check-mk_signal-cli
+
+
+# License 
+This project is licensed under the MIT license. See the [LICENSE](LICENSE) for details.
+
+
