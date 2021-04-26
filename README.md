@@ -13,6 +13,9 @@ This plugin uses signald for the communication with Signal.
 For the documentation of signald see:
 https://gitlab.com/signald/signald
 
+# Pull Requests
+If you find errors in the script, feel free to create pull requests.
+
 # Installation
 * Install signald on your server liked described here:
 https://signald.org/articles/getting-started/
