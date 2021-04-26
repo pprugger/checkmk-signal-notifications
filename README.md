@@ -1,0 +1,1 @@
+# checkmk-signal-notifications
