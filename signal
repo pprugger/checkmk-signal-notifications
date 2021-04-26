@@ -2,7 +2,6 @@
 # Send checkmk noficiations via Signal
 
 import os
-from dateutil import parser
 from datetime import datetime
 from signald import Signal
 import phonenumbers

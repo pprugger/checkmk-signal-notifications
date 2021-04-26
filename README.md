@@ -4,8 +4,6 @@ This checkmk plugin enables your checkmk server to send notifications via Signal
 At the moment there is no support for signal groups.
 
 This plugin requires the following python libraries:
-* dateutil
-* datetime
 * pysignald
 * phonenumbers
 
