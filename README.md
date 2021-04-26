@@ -27,3 +27,7 @@ https://signald.org/articles/getting-started/
 * Add a new notification rule, the number of the recipient is passed as a number in E164 format for example: +123456789
 
 ![Rule](/notification_rule.PNG)
+
+
+Here is an example of a signal message:
+![Example](/example.png)
