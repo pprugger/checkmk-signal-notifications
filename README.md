@@ -23,3 +23,7 @@ https://signald.org/articles/getting-started/
 * Install the python libraries
 * Copy this script to /omd/sites/<YOUR-SITE>/share/check_mk/notifications
 * Change from_number in the script to your signal account number
+* Add a new notification rule, the number of the recipient is passed as a number in E164 format
+  For example: +123456789
+
+![Rule](/notification_rule.PNG)
