@@ -1,0 +1,56 @@
+#!/usr/bin/python3
+# Send checkmk noficiations via Signal
+
+import os
+from dateutil import parser
+from datetime import datetime
+from signald import Signal
+import phonenumbers
+
+#Define your the number of your signal account used with signald here
+from_number = "+123456789"
+
+#Initialize the signal library
+signal = Signal(from_number)
+
+
+#Read the information from environment variables
+#Extracted from https://github.com/alberts/check_mk/blob/master/modules/notify.py
+
+event_duration = os.environ.get ("NOTIFY_LASTHOSTSTATECHANGE_REL", "<no duration>")
+event_hoststate = os.environ.get ("NOTIFY_HOSTSTATE", "<no state>")
+event_last_host_state = os.environ.get ("NOTIFY_LASTHOSTSTATE", "<no last state>")
+service_state = os.environ.get ("NOTIFY_SERVICESTATE", "<no state>")
+last_service_state = os.environ.get ("NOTIFY_LASTSERVICESTATE", "<no last state>")
+service_name = os.environ.get ("NOTIFY_SERVICEDESC", "<no description>")
+notification_type = os.environ.get ("NOTIFY_NOTIFICATIONTYPE", "<no type>")
+service_output = os.environ.get ("NOTIFY_SERVICEOUTPUT", "<no output>")
+omd_site = os.environ.get ("NOTIFY_OMD_SITE", "<no output>")
+event_host_name = os.environ.get ("NOTIFY_HOSTNAME", "<no host>")
+event_datetime_string = os.environ.get ("NOTIFY_LONGDATETIME", "<no time>")
+to_number_string = os.environ.get ("NOTIFY_PARAMETER_1", "<no number>")
+
+#This will throw an exception if no valid number is defined
+parsed_number = phonenumbers.parse(to_number_string)
+
+if event_datetime_string == "<no time>":
+    #set date to 1.1.1900 if there is no date to parse
+    event_datetime = datetime(1900,1,1).strftime("%a %b %d %H:%M:%S %Z %Y")
+else:
+    event_datetime = event_datetime_string
+
+message = "Site: " + omd_site + "\n"
+message += "Host: " + event_host_name + "\n"
+message += "Status: " + notification_type + "\n"
+message += "Service: " + service_name + " changed " + last_service_state + " -> " + service_state + " \n" + " \n"
+message += "Date: " + event_datetime + "\n"
+message += "Host status is " + event_hoststate + " after " + event_last_host_state + " for (" + event_duration + " )" + "\n"
+message += "Summary: " + service_output + " \n"
+
+##Activate this part to show all environment variables in signal for debugging
+#for k, v in os.environ.items():
+#    message += f'{k}={v}' + "\n"
+
+
+#Convert the number back to +123456789 format and send message
+signal.send_message(phonenumbers.format_number(parsed_number, phonenumbers.PhoneNumberFormat.E164), message)
