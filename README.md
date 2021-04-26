@@ -29,7 +29,7 @@ https://signald.org/articles/getting-started/
 ![Rule](/notification_rule.PNG)
 
 
-Here is an example of a signal message:
+Here is an example of a signal message, part of the data obfuscated for privacy reasons:
 
 
 ![Example](/example.png)
