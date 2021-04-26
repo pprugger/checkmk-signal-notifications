@@ -1,12 +1,12 @@
 #!/usr/bin/python3
-# Send checkmk noficiations via Signal
+# Send checkmk notifications via Signal
 
 import os
 from datetime import datetime
 from signald import Signal
 import phonenumbers
 
-#Define your the number of your signal account used with signald here
+#Define the number of your signal account used with signald here
 from_number = "+123456789"
 
 #Initialize the signal library
@@ -14,7 +14,7 @@ signal = Signal(from_number)
 
 
 #Read the information from environment variables
-#Extracted from https://github.com/alberts/check_mk/blob/master/modules/notify.py
+#Variables extracted from https://github.com/alberts/check_mk/blob/master/modules/notify.py
 
 event_duration = os.environ.get ("NOTIFY_LASTHOSTSTATECHANGE_REL", "<no duration>")
 event_hoststate = os.environ.get ("NOTIFY_HOSTSTATE", "<no state>")
