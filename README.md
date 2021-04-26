@@ -15,7 +15,10 @@ This plugin uses signald for the communication with Signal.
 For the documentation of signald see:
 https://gitlab.com/signald/signald
 
-## Installation
+# License 
+This project is licensed under the MIT license. See the [LICENSE](LICENSE) for details.
+
+# Installation
 * Install signald on your server liked described here:
 https://signald.org/articles/getting-started/
 
