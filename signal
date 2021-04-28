@@ -34,17 +34,26 @@ parsed_number = phonenumbers.parse(to_number_string)
 
 if event_datetime_string == "<no time>":
     #set date to 1.1.1900 if there is no date to parse
-    event_datetime = datetime(1900,1,1).strftime("%a %b %d %H:%M:%S %Z %Y")
+    event_datetime = datetime(1970,1,1).strftime("%a %b %d %H:%M:%S %Z %Y")
 else:
     event_datetime = event_datetime_string
 
 message = "Site: " + omd_site + "\n"
 message += "Host: " + event_host_name + "\n"
 message += "Status: " + notification_type + "\n"
-message += "Service: " + service_name + " changed " + last_service_state + " -> " + service_state + " \n" + " \n"
-message += "Date: " + event_datetime + "\n"
-message += "Host status is " + event_hoststate + " after " + event_last_host_state + " for (" + event_duration + " )" + "\n"
-message += "Summary: " + service_output + " \n"
+
+#Check if just the host state changed, or also a service state changed
+#Do not post the service data if their is none
+if event_hoststate != event_last_host_state:
+   if service_name == "<no description>":
+      message += "\n"
+      message += "Date: " + event_datetime + "\n"
+      message += "Host status is " + event_hoststate + " after " + event_last_host_state + " for (" + event_duration + " )"
+else:
+   message += "Service: " + service_name + " changed " + last_service_state + " -> " + service_state + " \n" + " \n"
+   message += "Date: " + event_datetime + "\n"
+   message += "Host status is " + event_hoststate + " after " + event_last_host_state + " for (" + event_duration + " )" + "\n"
+   message += "Summary: " + service_output + " \n"
 
 ##Activate this part to show all environment variables in signal for debugging
 #for k, v in os.environ.items():
